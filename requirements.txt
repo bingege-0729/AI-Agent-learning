@@ -1,0 +1,11 @@
+# LangChain 和 LangGraph 学习项目依赖
+
+# LangChain 核心库
+langchain>=0.1.0
+langchain-openai>=0.0.5
+
+# LangGraph
+langgraph>=0.0.20
+
+# 其他依赖
+python-dotenv>=1.0.0
