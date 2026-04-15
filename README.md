@@ -21,9 +21,9 @@ langent-env/
 ## 文件说明
 
 - `langchain/`: 包含 LangChain 学习示例和笔记
-  - [查看 LangChain 学习说明](./langchain/README.md)
+  - [查看 LangChain 学习说明](langchain/readme.md)
 - `langgraph/`: 包含 LangGraph 学习示例和笔记
-  - [查看 LangGraph 学习说明](./langgraph/README.md)
+  - [查看 LangGraph 学习说明](langgraph/readme.md)
 - `requirements.txt`: 项目依赖列表
 - `run.py`: 便捷运行脚本，可以运行所有示例或特定示例
 - `.gitignore`: Git 忽略文件，指定不需要上传到远程仓库的文件和目录
