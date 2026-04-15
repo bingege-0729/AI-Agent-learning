@@ -14,7 +14,7 @@ chat_model = ChatOpenAI(
     base_url=BASE_URL,
     model="qwen-turbo",
     temperature=0.5,
-    max_tokens=200
+    max_tokens=50
 )
 
 message =[
