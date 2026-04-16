@@ -6,24 +6,83 @@
 
 ```
 langent-env/
-├── langchain/      # LangChain 学习示例
-│   ├── README.md   # LangChain 学习说明
-│   └── test1.py    # LangChain 基础示例
-├── langgraph/      # LangGraph 学习示例
-│   ├── README.md   # LangGraph 学习说明
-│   └── test1.py    # LangGraph 基础示例
-├── .gitignore      # Git 忽略文件
-├── README.md       # 项目说明（本文件）
-├── requirements.txt # 依赖列表
-└── run.py          # 运行脚本
+├── langchain/                    # LangChain 学习示例
+│   ├── README.md                 # LangChain 学习说明
+│   ├── test1.py                  # 基础模型调用示例
+│   ├── test2.py                  # 系统提示词设置示例
+│   ├── test3.py                  # 多轮对话示例
+│   ├── test4.py                  # PromptTemplate 使用示例
+│   ├── test5.py                  # FewShotPromptTemplate 使用示例
+│   ├── test6.py                  # 自定义 ExampleSelector 示例
+│   ├── test7.py                  # 输出解析器 (StrOutputParser) 示例
+│   └── learning_method_example.json # 学习方法示例数据
+├── langgraph/                    # LangGraph 学习示例
+│   ├── README.md                 # LangGraph 学习说明
+│   └── test1.py                  # LangGraph 基础示例
+├── .gitignore                    # Git 忽略文件
+├── README.md                     # 项目说明（本文件）
+├── requirements.txt              # 依赖列表
+└── run.py                        # 运行脚本
 ```
 
 ## 文件说明
 
-- `langchain/`: 包含 LangChain 学习示例和笔记
-  - [查看 LangChain 学习说明](langchain/readme.md)
-- `langgraph/`: 包含 LangGraph 学习示例和笔记
-  - [查看 LangGraph 学习说明](langgraph/readme.md)
+### LangChain 目录
+
+`langchain/` 目录包含 LangChain 学习示例和笔记：
+
+- [查看 LangChain 学习说明](langchain/README.md)
+
+**文件列表**：
+- `test1.py`: 基础模型调用示例
+  - 演示如何使用 LangChain 封装大语言模型进行基础对话
+  - 使用 ChatOpenAI 封装模型，设置模型参数
+  - 通过 invoke() 方法调用模型
+
+- `test2.py`: 系统提示词设置示例
+  - 展示如何设置系统提示词来定义 AI 的角色和行为
+  - 构造多角色消息列表
+  - 实现角色化的对话回复
+
+- `test3.py`: 多轮对话示例
+  - 演示如何实现多轮对话功能
+  - 维护对话历史记录
+  - 实现上下文关联的连续对话
+
+- `test4.py`: PromptTemplate 使用示例
+  - 展示如何使用提示词模板
+  - 定义动态提示词模板
+  - 使用 input_variables 设置参数
+
+- `test5.py`: FewShotPromptTemplate 使用示例
+  - 演示少样本提示（Few-Shot Prompting）技术
+  - 定义示例数据
+  - 使用 FewShotPromptTemplate 生成提示词
+
+- `test6.py`: 自定义 ExampleSelector 示例
+  - 展示如何自定义示例选择器
+  - 继承 BaseExampleSelector 类
+  - 实现动态示例选择逻辑
+
+- `test7.py`: 输出解析器示例
+  - 演示如何使用输出解析器
+  - 使用 StrOutputParser 解析模型输出
+  - 构建模型→解析器的链
+
+### LangGraph 目录
+
+`langgraph/` 目录包含 LangGraph 学习示例和笔记：
+
+- [查看 LangGraph 学习说明](langgraph/README.md)
+
+**文件列表**：
+- `test1.py`: LangGraph 基础示例
+  - 演示如何构建简单的工作流
+  - 展示图结构的工作流
+  - 支持状态管理和节点之间的数据流
+
+### 项目文件
+
 - `requirements.txt`: 项目依赖列表
 - `run.py`: 便捷运行脚本，可以运行所有示例或特定示例
 - `.gitignore`: Git 忽略文件，指定不需要上传到远程仓库的文件和目录
