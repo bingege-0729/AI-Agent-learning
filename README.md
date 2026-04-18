@@ -7,67 +7,72 @@
 ```
 langent-env/
 ├── langchain/                    # LangChain 学习示例
-│   ├── README.md                 # LangChain 学习说明
-│   ├── test1.py                  # 基础模型调用示例
-│   ├── test2.py                  # 系统提示词设置示例
-│   ├── test3.py                  # 多轮对话示例
-│   ├── test4.py                  # PromptTemplate 使用示例
-│   ├── test5.py                  # FewShotPromptTemplate 使用示例
-│   ├── test6.py                  # 自定义 ExampleSelector 示例
-│   ├── test7.py                  # 输出解析器 (StrOutputParser) 示例
-│   └── learning_method_example.json # 学习方法示例数据
+│   ├── chapter3/                 # 第三章：记忆与代理
+│   │   ├── test1.py              # 全量记忆示例
+│   │   ├── test2.py              # 窗口记忆示例
+│   │   ├── test3.py              # 摘要记忆示例
+│   │   ├── test4.py              # 基础 Agent 示例
+│   │   ├── test5.py              # 带参数验证的 Agent 示例
+│   │   ├── test6.py              # 文件管理 Agent 示例
+│   │   ├── Calculator.py         # 计算器工具
+│   │   └── FileCon.py            # 文件连接工具
 ├── langgraph/                    # LangGraph 学习示例
+│   ├── chapter3/                 # 第三章示例
 │   ├── README.md                 # LangGraph 学习说明
 │   └── test1.py                  # LangGraph 基础示例
+├── .env                          # 环境变量配置
 ├── .gitignore                    # Git 忽略文件
 ├── README.md                     # 项目说明（本文件）
-├── requirements.txt              # 依赖列表
-└── run.py                        # 运行脚本
+└── requirements.txt              # 依赖列表
 ```
 
 ## 文件说明
 
 ### LangChain 目录
 
-`langchain/` 目录包含 LangChain 学习示例和笔记：
+`langchain/` 目录包含 LangChain 学习示例和笔记，主要聚焦于记忆管理和 Agent 应用：
 
-- [查看 LangChain 学习说明](langchain/README.md)
+**chapter3 - 记忆与代理**：
 
-**文件列表**：
-- `test1.py`: 基础模型调用示例
-  - 演示如何使用 LangChain 封装大语言模型进行基础对话
-  - 使用 ChatOpenAI 封装模型，设置模型参数
-  - 通过 invoke() 方法调用模型
+- `test1.py`: 全量记忆示例
+  - 演示如何实现完整对话历史的记忆
+  - 使用 InMemoryChatMessageHistory 存储对话
+  - 通过 RunnableWithMessageHistory 管理会话
+  - 适用于需要记住所有历史信息的场景
 
-- `test2.py`: 系统提示词设置示例
-  - 展示如何设置系统提示词来定义 AI 的角色和行为
-  - 构造多角色消息列表
-  - 实现角色化的对话回复
+- `test2.py`: 窗口记忆示例
+  - 演示滑动窗口记忆机制
+  - 只保留最近 N 轮对话
+  - 自动截断旧消息以节省 token
+  - 适用于只需要关注最近对话的场景
 
-- `test3.py`: 多轮对话示例
-  - 演示如何实现多轮对话功能
-  - 维护对话历史记录
-  - 实现上下文关联的连续对话
+- `test3.py`: 摘要记忆示例
+  - 演示如何使用摘要压缩对话历史
+  - 自动生成对话摘要
+  - 将摘要注入到提示词中
+  - 平衡记忆完整性和 token 消耗
 
-- `test4.py`: PromptTemplate 使用示例
-  - 展示如何使用提示词模板
-  - 定义动态提示词模板
-  - 使用 input_variables 设置参数
+- `test4.py`: 基础 Agent 示例
+  - 演示如何创建简单的 Agent
+  - 使用 @tool 装饰器定义工具
+  - 实现天气查询功能
+  - 展示 Agent 自动调用工具的能力
 
-- `test5.py`: FewShotPromptTemplate 使用示例
-  - 演示少样本提示（Few-Shot Prompting）技术
-  - 定义示例数据
-  - 使用 FewShotPromptTemplate 生成提示词
+- `test5.py`: 带参数验证的 Agent 示例
+  - 演示如何为工具添加参数验证
+  - 使用 Pydantic 定义参数模型
+  - 实现温度单位转换工具
+  - 展示类型安全的工具调用
 
-- `test6.py`: 自定义 ExampleSelector 示例
-  - 展示如何自定义示例选择器
-  - 继承 BaseExampleSelector 类
-  - 实现动态示例选择逻辑
+- `test6.py`: 文件管理 Agent 示例
+  - 演示如何使用 FileManagementToolkit
+  - 实现文件读写操作
+  - Agent 自动执行文件管理任务
+  - 展示复杂工具集成的能力
 
-- `test7.py`: 输出解析器示例
-  - 演示如何使用输出解析器
-  - 使用 StrOutputParser 解析模型输出
-  - 构建模型→解析器的链
+**工具模块**：
+- `Calculator.py`: 计算器工具
+- `FileCon.py`: 文件连接工具
 
 ### LangGraph 目录
 
@@ -83,8 +88,10 @@ langent-env/
 
 ### 项目文件
 
+- `.env`: 环境变量配置文件
+  - OPENAI_API_KEY: API 密钥
+  - BASE_URL: API 基础 URL
 - `requirements.txt`: 项目依赖列表
-- `run.py`: 便捷运行脚本，可以运行所有示例或特定示例
 - `.gitignore`: Git 忽略文件，指定不需要上传到远程仓库的文件和目录
 - `README.md`: 项目说明文件（本文件）
 
@@ -114,32 +121,38 @@ langent-env/
 
 ## 运行示例
 
-您可以使用以下两种方式运行示例：
+### LangChain 示例
 
-### 使用 run.py 脚本（推荐）
-
-运行所有示例：
 ```bash
-python run.py all
-```
+# 进入 chapter3 目录
+cd langchain/chapter3
 
-运行特定示例：
-```bash
-python run.py langchain    # 运行 LangChain 示例
-python run.py langgraph    # 运行 LangGraph 示例
-```
-
-### 直接运行
-
-运行 LangChain 基础示例：
-```bash
-cd langchain
+# 运行全量记忆示例
 python test1.py
+
+# 运行窗口记忆示例
+python test2.py
+
+# 运行摘要记忆示例
+python test3.py
+
+# 运行基础 Agent 示例
+python test4.py
+
+# 运行带参数验证的 Agent 示例
+python test5.py
+
+# 运行文件管理 Agent 示例
+python test6.py
 ```
 
-运行 LangGraph 基础示例：
+### LangGraph 示例
+
 ```bash
+# 进入 langgraph 目录
 cd langgraph
+
+# 运行 LangGraph 基础示例
 python test1.py
 ```
 
