@@ -16,6 +16,19 @@ langent-env/
 │   │   ├── test6.py              # 文件管理 Agent 示例
 │   │   ├── Calculator.py         # 计算器工具
 │   │   └── FileCon.py            # 文件连接工具
+│   ├── chapter4/                 # 第四章：RAG 检索增强生成
+│   │   ├── knowledge_base/       # 知识库文件夹
+│   │   ├── test7.py              # TXT 文档加载
+│   │   ├── test8.py              # PDF 文档加载（PyPDFLoader）
+│   │   ├── test9.py              # Word 文档加载
+│   │   ├── test10.py             # 批量文档加载
+│   │   ├── test11.py             # 文本拆分器配置
+│   │   ├── test12.py             # Markdown 文档处理
+│   │   ├── test13.py             # 向量库构建与检索
+│   │   └── test14.py             # FAISS 向量库完整流程
+│   ├── learning_method_example.json
+│   ├── readme.md                 # LangChain 详细说明
+│   └── test*.py                  # 其他测试文件
 ├── langgraph/                    # LangGraph 学习示例
 │   ├── chapter3/                 # 第三章示例
 │   ├── README.md                 # LangGraph 学习说明
@@ -70,6 +83,47 @@ langent-env/
   - Agent 自动执行文件管理任务
   - 展示复杂工具集成的能力
 
+**chapter4 - RAG 检索增强生成**：
+
+- `test7.py`: TXT 文档加载
+  - 使用 TextLoader 加载纯文本文件
+  - 演示 Document 对象的基本结构
+  - 理解 page_content 和 metadata
+
+- `test8.py`: PDF 文档加载
+  - PyPDFLoader 基础用法（按页拆分）
+  - PDFPlumberLoader 高级用法（保留表格）
+  - 对比不同加载器的适用场景
+
+- `test9.py`: Word 文档加载
+  - 使用 Docx2txtLoader 加载 .docx 文件
+  - 统一的 Document 接口设计
+
+- `test10.py`: 批量文档加载
+  - 遍历文件夹自动识别文件格式
+  - 根据后缀选择对应的加载器
+  - 异常处理和故障隔离
+
+- `test11.py`: 文本拆分器配置
+  - RecursiveCharacterTextSplitter 核心参数
+  - chunk_size 和 chunk_overlap 的作用
+  - 中文分隔符优化配置
+
+- `test12.py`: Markdown 文档处理
+  - UnstructuredMarkdownLoader 结构化加载
+  - MarkdownTextSplitter 智能拆分
+  - 保留标题层级关系
+
+- `test13.py`: 向量库构建与检索
+  - HuggingFace Embeddings 初始化
+  - FAISS 向量库创建与持久化
+  - 相似性检索测试
+
+- `test14.py`: FAISS 向量库完整流程
+  - 从文档加载到向量检索的完整链路
+  - 本地 CPU 运行的嵌入模型
+  - 带评分的检索结果展示
+
 **工具模块**：
 - `Calculator.py`: 计算器工具
 - `FileCon.py`: 文件连接工具
@@ -123,6 +177,8 @@ langent-env/
 
 ### LangChain 示例
 
+#### Chapter 3 - 记忆与代理
+
 ```bash
 # 进入 chapter3 目录
 cd langchain/chapter3
@@ -146,6 +202,37 @@ python test5.py
 python test6.py
 ```
 
+#### Chapter 4 - RAG 检索增强生成
+
+```bash
+# 进入 chapter4 目录
+cd langchain/chapter4
+
+# 运行 TXT 文档加载
+python test7.py
+
+# 运行 PDF 文档加载
+python test8.py
+
+# 运行 Word 文档加载
+python test9.py
+
+# 运行批量文档加载
+python test10.py
+
+# 运行文本拆分器配置
+python test11.py
+
+# 运行 Markdown 文档处理
+python test12.py
+
+# 运行向量库构建与检索
+python test13.py
+
+# 运行 FAISS 完整流程（首次运行会下载模型）
+python test14.py
+```
+
 ### LangGraph 示例
 
 ```bash
@@ -163,9 +250,11 @@ python test1.py
 
 ## 注意事项
 
-1. 本项目使用阿里云 DashScope 的 API，需要您自己申请 API Key
-2. 请确保不要将 `.env` 文件上传到远程仓库，它已经在 `.gitignore` 中被排除
-3. 如果您想使用其他模型，请修改代码中的 `model` 参数
+1. **API 配置**：本项目支持多种 API（阿里云 DashScope、DeepSeek、OpenAI 等），需要在 `.env` 中配置对应的 API Key
+2. **隐私安全**：请确保不要将 `.env` 文件上传到远程仓库，它已经在 `.gitignore` 中被排除
+3. **模型选择**：如果您想使用其他模型，请修改代码中的 `model` 参数
+4. **RAG 模型下载**：首次运行 RAG 相关示例时，会自动下载 Embedding 模型（约 100MB），需要联网
+5. **代理问题**：如遇到 SSL 或代理错误，请参考项目内的故障排查文档
 
 ## 许可证
 
