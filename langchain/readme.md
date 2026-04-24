@@ -17,16 +17,26 @@ langchain/
 │   └── FileCon.py              # 文件连接工具
 ├── chapter4/                   # 第四章：RAG 检索增强生成
 │   ├── knowledge_base/         # 知识库文件夹（存放测试文档）
+│   ├── models/                 # 本地嵌入模型存储
+│   ├── faiss_db/               # FAISS 向量数据库索引
+│   ├── download_model.py       # 模型下载脚本
+│   ├── rebuild_faiss.py        # FAISS 向量库重建脚本
 │   ├── test7.py                # TXT 文档加载
 │   ├── test8.py                # PDF 文档加载
 │   ├── test9.py                # Word 文档加载
-│   ├── test10.py               # 批量文档加载
-│   ├── test11.py               # 文本拆分器配置
-│   ├── test12.py               # Markdown 文档处理
+│   ├── test10.py               # Markdown 文档处理
+│   ├── test11.py               # 批量文档加载
+│   ├── test12.py               # 文本拆分器配置
 │   ├── test13.py               # 向量库构建与检索
-│   └── test14.py               # FAISS 向量库完整流程
+│   ├── test14.py               # FAISS 向量库完整流程
+│   ├── test15.py               # FAISS 加载示例
+│   ├── test15_load_faiss.py    # FAISS 加载详解版
+│   ├── test16.py               # 多策略检索对比
+│   ├── test17.py               # 检索器详细测试
+│   └── test18.py               # LCEL RAG 链式调用（完整版）
 ├── learning_method_example.json
-└── readme.md                   # 本文件
+├── readme.md                   # 本文件
+└── FAQ.md                      # 常见问题解答
 ```
 
 ## 🚀 快速开始
@@ -89,15 +99,25 @@ cd chapter4
 python test7.py    # TXT 文档加载
 python test8.py    # PDF 文档加载
 python test9.py    # Word 文档加载
-python test12.py   # Markdown 文档处理
+python test10.py   # Markdown 文档处理
 
 # 2. 批量处理与拆分
-python test10.py   # 批量文档加载
-python test11.py   # 文本拆分器配置
+python test11.py   # 批量文档加载
+python test12.py   # 文本拆分器配置
 
 # 3. 向量库构建与检索
 python test13.py   # 向量库构建与检索
 python test14.py   # FAISS 完整流程（首次运行会下载模型）
+
+# 4. 高级检索与 LCEL 链式调用
+python test15_load_faiss.py  # FAISS 加载详解
+python test16.py             # 多策略检索对比
+python test17.py             # 检索器详细测试
+python test18.py             # LCEL RAG 链式调用（完整版）
+
+# 5. 实用工具
+python rebuild_faiss.py      # 重建 FAISS 向量库（修改源文本后运行）
+python download_model.py     # 下载嵌入模型到本地
 ```
 
 ## 📖 文件说明
