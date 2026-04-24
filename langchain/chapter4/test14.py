@@ -1,4 +1,10 @@
+# 配置 HuggingFace 镜像源(解决国内访问问题)
+# 必须在所有 huggingface 相关导入之前设置
 import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['HF_HUB_OFFLINE'] = '0'
+os.environ['HF_HUB_DOWNLOAD_TIMEOUT'] = '60'
+
 from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -34,6 +40,8 @@ print(f"分割后的文本片段数：{len(split_docs)}")
 
 # 3. 初始化本地CPU运行的嵌入模型
 # 使用 BAAI/bge-small-zh-v1.5，对中文支持好且体积小，首次运行会自动下载
+print("正在加载嵌入模型...")
+# 如果使用本地模型，将下面这行改为：embedding_model_name = "./models/bge-small-zh-v1.5"
 embedding_model_name = "BAAI/bge-small-zh-v1.5"
 
 embeddings = HuggingFaceEmbeddings(
@@ -49,6 +57,7 @@ embeddings = HuggingFaceEmbeddings(
         # （Cosine Similarity）计算距离时，归一化后的向量计算更快、更准确。
     }
 )
+print("✓ 嵌入模型加载完成")
 
 # 4. 构建并持久化FAISS向量库
 try:
