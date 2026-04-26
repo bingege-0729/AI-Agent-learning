@@ -6,6 +6,11 @@
 
 ```
 langent-env/
+├── demoproject/                  # RAG 实战项目
+│   ├── docs/                     # 知识库文档文件夹
+│   │   └── *.pdf, *.pptx, *.docx
+│   ├── chroma_db/                # Chroma 向量数据库（自动生成）
+│   └── ragApp.py                 # RAG 智能问答系统
 ├── langchain/                    # LangChain 学习示例
 │   ├── chapter3/                 # 第三章：记忆与代理
 │   │   ├── test1.py              # 全量记忆示例
@@ -29,6 +34,10 @@ langent-env/
 │   ├── learning_method_example.json
 │   ├── readme.md                 # LangChain 详细说明
 │   └── test*.py                  # 其他测试文件
+├── demoproject/                  # RAG 实战项目
+│   ├── docs/                     # 知识库文档文件夹
+│   ├── chroma_db/                # Chroma 向量数据库
+│   └── ragApp.py                 # RAG 智能问答系统（持续对话模式）
 ├── langgraph/                    # LangGraph 学习示例
 │   ├── chapter3/                 # 第三章示例
 │   ├── README.md                 # LangGraph 学习说明
@@ -40,6 +49,38 @@ langent-env/
 ```
 
 ## 文件说明
+
+### DemoProject - RAG 实战项目
+
+`demoproject/` 目录包含一个完整的 RAG（检索增强生成）智能问答系统：
+
+**ragApp.py**: RAG 智能问答系统
+- **功能特性**：
+  - 自动加载 `docs/` 文件夹下的 PDF、PPT、DOCX 文档
+  - 使用 BGE 中文嵌入模型进行向量化
+  - Chroma 向量数据库持久化存储
+  - 阿里云通义千问作为 LLM
+  - 持续对话模式，支持多轮问答
+  - 简洁的命令行交互界面
+
+- **技术栈**：
+  - LangChain (LCEL 新式 API)
+  - HuggingFace Embeddings (BAAI/bge-small-zh-v1.5)
+  - Chroma 向量数据库
+  - ChatTongyi (通义千问)
+
+- **使用方法**：
+  ```bash
+  # 将文档放入 demoproject/docs/ 文件夹
+  # 运行 RAG 应用
+  python demoproject/ragApp.py
+  
+  # 在对话中输入问题，输入 'q' 退出
+  ```
+
+- **配置要求**：
+  - 在 `.env` 文件中配置 `OPENAI_API_KEY`（通义千问 API Key）
+  - 首次运行会自动下载嵌入模型（约 100MB）
 
 ### LangChain 目录
 
@@ -243,6 +284,20 @@ cd langgraph
 python test1.py
 ```
 
+### RAG 实战项目
+
+```bash
+# 准备知识库文档
+# 将 PDF/PPT/DOCX 文件放入 demoproject/docs/ 文件夹
+
+# 运行 RAG 智能问答系统
+python demoproject/ragApp.py
+
+# 系统启动后，可以持续提问：
+# - 输入问题获取基于文档的回答
+# - 输入 'q' 或 'quit' 或 'exit' 退出
+```
+
 ## 学习资源
 
 - [LangChain 官方文档](https://python.langchain.com/)
@@ -255,6 +310,10 @@ python test1.py
 3. **模型选择**：如果您想使用其他模型，请修改代码中的 `model` 参数
 4. **RAG 模型下载**：首次运行 RAG 相关示例时，会自动下载 Embedding 模型（约 100MB），需要联网
 5. **代理问题**：如遇到 SSL 或代理错误，请参考项目内的故障排查文档
+6. **RAG 项目文档管理**：
+   - 将需要问答的文档放入 `demoproject/docs/` 文件夹
+   - 支持格式：PDF、PPT、PPTX、DOCX
+   - 修改文档后需删除 `demoproject/chroma_db/` 文件夹重新构建向量库
 
 ## 许可证
 

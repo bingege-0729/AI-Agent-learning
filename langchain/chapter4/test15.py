@@ -1,7 +1,13 @@
+import os
+# 配置 HuggingFace 国内镜像源
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['HF_HUB_DISABLE_TELEMETRY'] = '1'
+
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 
-embedding_model_name = "./models/Qwen/Qwen3-Embedding-0___6B"
+# 使用在线模型（首次运行会自动下载）
+embedding_model_name = "BAAI/bge-small-zh-v1.5"  # 中文效果好，体积小
 
 # 初始化本地CPU运行的嵌入模型
 # 字典参数传递
